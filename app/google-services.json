@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "576025031434",
+    "project_id": "fir-cak",
+    "storage_bucket": "fir-cak.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:576025031434:android:b43f52c5bc539f997f00f3",
+        "android_client_info": {
+          "package_name": "com.caleb.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4s5hPg_OYGmTh-JagMcxsO1x6B8e4GmY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
