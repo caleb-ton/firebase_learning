@@ -1,6 +1,8 @@
 package com.caleb.myapplication.ui.theme.screens.register
 
+import android.content.Context
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,7 +10,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,10 +30,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.caleb.myapplication.data.AuthViewModel
 import com.caleb.myapplication.navigation.ROUTE_LOGIN
 
 
@@ -35,10 +49,12 @@ fun RegisterScreen(navController:NavHostController) {
     var pass by remember { mutableStateOf(TextFieldValue("")) }
     var confirmpass by remember { mutableStateOf(TextFieldValue("")) }
     var context= LocalContext.current
+    var passwordVisible by remember { mutableStateOf(false) }
     Column(modifier = Modifier
         .fillMaxSize()
-        .background(Color.Cyan),
-        horizontalAlignment = Alignment.CenterHorizontally) {
+        .background(Color.Transparent),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center) {
 
         Text(text = "Register here",
             color = Color.Cyan,
@@ -46,37 +62,73 @@ fun RegisterScreen(navController:NavHostController) {
             fontSize = 30.sp)
         Spacer(modifier = Modifier.height(20.dp))
 
+
+
+
         OutlinedTextField(
             value = email, onValueChange = { email = it },
             label = { Text(text = "Enter Email") },
-
-            keyboardOptions = KeyboardOptions . Default . copy (imeAction = ImeAction.Next),
+            leadingIcon = {
+                // Add the email icon here
+                Icon(
+                    imageVector = Icons.Filled.Email,
+                    contentDescription = "Email Icon"
+                )
+            },
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = ImeAction.Next
+            ),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
+                .padding(25.dp),
 
             )
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(1.dp))
+
 
         OutlinedTextField(value =pass , onValueChange = {pass=it},
-            label = { Text(text = "Enter password") },
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+            label = { Text(text = "Enter Password") },
+
+            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Filled.Person,
+                    contentDescription = "Email Icon"
+                )},
+            trailingIcon = {
+                IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                    Text(text = if (passwordVisible) "Hide" else "Show")
+                }
+            },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(25.dp)
         )
-        Spacer(modifier = Modifier.height(20.dp))
-        OutlinedTextField(value =confirmpass , onValueChange = {
-            confirmpass=it},
-            label = { Text(text = "Enter Confirm Pass") },
 
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+        Spacer(modifier = Modifier.height(1.dp))
+
+        OutlinedTextField(value =pass , onValueChange = {pass=it},
+            label = { Text(text = "Enter Password") },
+
+            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Filled.Person,
+                    contentDescription = "Email Icon"
+                )},
+            trailingIcon = {
+                IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                    Text(text = if (passwordVisible) "Hide" else "Show")
+                }
+            },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(25.dp)
         )
-        Spacer(modifier = Modifier.height(20.dp))
 
+        Spacer(modifier = Modifier.height(1.dp))
 
         Button(onClick = {
             val myregister= AuthViewModel(navController,context)
@@ -85,14 +137,24 @@ fun RegisterScreen(navController:NavHostController) {
 
 
 
-        }, modifier = Modifier.fillMaxWidth()) {
+        }, modifier = Modifier.fillMaxWidth()
+            .padding(horizontal = 35.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.Red
+
+            )) {
             Text(text = "Register ")
         }
         Spacer(modifier = Modifier.height(20.dp))
 
         Button(onClick = {
             navController.navigate(ROUTE_LOGIN)
-        }, modifier = Modifier.fillMaxWidth()) {
+        }, modifier = Modifier.fillMaxWidth()
+            .padding(horizontal = 35.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.Red
+
+            )) {
             Text(text = "Have an Account? Click to Login")
         }
 

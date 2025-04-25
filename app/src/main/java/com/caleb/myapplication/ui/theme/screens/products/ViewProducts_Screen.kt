@@ -5,6 +5,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
@@ -20,8 +23,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.caleb.myapplication.data.productviewmodel
+import com.caleb.myapplication.model.Product
 import com.caleb.myapplication.navigation.ROUTE_UPDATE_PRODUCT
-
 
 
 @Composable
@@ -49,18 +53,18 @@ fun ViewProductsScreen(navController:NavHostController) {
 
             Spacer(modifier = Modifier.height(20.dp))
 
-//            LazyColumn(){
-//                items(products){
-//                    ProductItem(
-//                        name = it.name,
-//                        quantity = it.quantity,
-//                        price = it.price,
-//                        id = it.id,
-//                        navController = navController,
-//                        productRepository = productRepository
-//                    )
-//                }
-//            }
+            LazyColumn(){
+                items(products){
+                    ProductItem(
+                        name = it.name,
+                        quantity = it.quantity,
+                        price = it.price,
+                        id = it.id,
+                        navController = navController,
+                        productRepository = productRepository
+                    )
+                }
+            }
         }
     }
 
@@ -80,7 +84,7 @@ fun ProductItem(name:String, quantity:String, price:String, id:String,
             Text(text = "Delete")
         }
         Button(onClick = {
-            navController.navigate(ROUTE_UPDATE_PRODUCT +"/$id")
+            navController.navigate(ROUTE_UPDATE_PRODUCT+"/$id")
         }) {
             Text(text = "Update")
         }

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,7 +29,7 @@ import com.caleb.myapplication.navigation.ROUTE_VIEW_UPLOAD
 fun HomeScreen(navController: NavHostController) {
     Column(modifier = Modifier
         .fillMaxSize()
-        .background(Color.Red),
+        .background(Color.Transparent),
         horizontalAlignment = Alignment.CenterHorizontally) {
         var context= LocalContext.current
 //        var productdata=productviewmodel(navController,context)
@@ -39,25 +40,52 @@ fun HomeScreen(navController: NavHostController) {
             fontSize = 30.sp)
         Spacer(modifier = Modifier.height(100.dp))
 
-        Button(onClick = {
-            navController.navigate(ROUTE_ADD_PRODUCT)
-        },modifier = Modifier.fillMaxWidth()) {
-            Text(text = "Add Product")
+
+        Button(
+            onClick = {
+                navController.navigate(ROUTE_ADD_PRODUCT)
+            },
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.Red
+
+            )
+        ) {
+            Text(text = "Add Product",
+                color = Color.Cyan)
+        }
+
+        Spacer(modifier = Modifier.height(100.dp))
+
+        Button(
+            onClick = {
+                navController.navigate(ROUTE_ADD_PRODUCT)
+            },
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.Red
+
+            )
+        ) {
+            Text(text = "View Product",
+                color = Color.Cyan)
         }
         Spacer(modifier = Modifier.height(100.dp))
 
-        Button(onClick = {
-            navController.navigate(ROUTE_VIEW_PRODUCT)
-        },modifier = Modifier.fillMaxWidth()) {
-            Text(text = "View Product")
-        }
-        Spacer(modifier = Modifier.height(100.dp))
+        Button(
+            onClick = {
+                navController.navigate(ROUTE_ADD_PRODUCT)
+            },
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.Red
 
-        Button(onClick = {
-            navController.navigate(ROUTE_VIEW_UPLOAD)
-        },modifier = Modifier.fillMaxWidth()) {
-            Text(text = "View Products")
+            )
+        ) {
+            Text(text = "Add Product",
+                color = Color.Cyan)
         }
+
 
 
     }

@@ -1,6 +1,7 @@
 package com.caleb.myapplication.ui.theme.screens.products
 
 import android.content.Context
+import android.content.res.Configuration
 import android.net.Uri
 import android.provider.MediaStore
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -8,6 +9,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,8 +32,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.caleb.myapplication.data.productviewmodel
 import com.caleb.myapplication.navigation.ROUTE_VIEW_PRODUCT
-
 
 
 @Composable
@@ -79,7 +82,7 @@ fun AddProductsScreen(navController: NavHostController) {
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        Button(onClick = {
+        Button (onClick = {
             //-----------WRITE THE SAVE LOGIC HERE---------------//
             var productRepository = productviewmodel(navController,context)
             productRepository.saveProduct(productName.text.trim(),productQuantity.text.trim(),
@@ -99,16 +102,6 @@ fun AddProductsScreen(navController: NavHostController) {
         //---------------------IMAGE PICKER END-----------------------------------//
 
     }
-}
-
-@Composable
-fun OutlinedTextField(
-    value: TextFieldValue,
-    onValueChange: () -> Unit,
-    label: () -> Unit,
-    keyboardOptions: KeyboardOptions
-) {
-    TODO("Not yet implemented")
 }
 
 @Composable

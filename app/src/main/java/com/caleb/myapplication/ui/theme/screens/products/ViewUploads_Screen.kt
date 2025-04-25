@@ -2,6 +2,9 @@ package com.caleb.myapplication.ui.theme.screens.products
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
@@ -15,7 +18,11 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import coil.compose.rememberAsyncImagePainter
+import com.caleb.myapplication.data.productviewmodel
+import com.caleb.myapplication.model.Upload
 import com.caleb.myapplication.navigation.ROUTE_UPDATE_PRODUCT
+
 
 
 @Composable
@@ -45,19 +52,19 @@ fun ViewUploadsScreen(navController:NavHostController) {
 
             Spacer(modifier = Modifier.height(20.dp))
 
-//            LazyColumn(){
-//                items(uploads){
-//                    UploadItem(
-//                        name = it.name,
-//                        quantity = it.quantity,
-//                        price = it.price,
-//                        imageUrl = it.imageUrl,
-//                        id = it.id,
-//                        navController = navController,
-//                        productRepository = productRepository
-//                    )
-//                }
-//            }
+            LazyColumn(){
+                items(uploads){
+                    UploadItem(
+                        name = it.name,
+                        quantity = it.quantity,
+                        price = it.price,
+                        imageUrl = it.imageUrl,
+                        id = it.id,
+                        navController = navController,
+                        productRepository = productRepository
+                    )
+                }
+            }
         }
     }
 }
@@ -82,14 +89,9 @@ fun UploadItem(name:String, quantity:String, price:String, imageUrl:String, id:S
             Text(text = "Delete")
         }
         Button(onClick = {
-            navController.navigate(ROUTE_UPDATE_PRODUCT +"/$id")
+            navController.navigate(ROUTE_UPDATE_PRODUCT+"/$id")
         }) {
             Text(text = "Update")
         }
     }
-}
-
-@Composable
-fun Button(onClick: () -> deleteProduct, content: @Composable () -> Unit) {
-    TODO("Not yet implemented")
 }
