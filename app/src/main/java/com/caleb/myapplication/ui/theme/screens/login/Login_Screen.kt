@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -92,8 +93,8 @@ fun LoginScreen(navController:NavHostController) {
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             leadingIcon = {
                 Icon(
-                    imageVector = Icons.Filled.Person,
-                    contentDescription = "Email Icon"
+                    imageVector = Icons.Filled.Lock,
+                    contentDescription = "Password Icon"
                 )},
             trailingIcon = {
                 IconButton(onClick = { passwordVisible = !passwordVisible }) {

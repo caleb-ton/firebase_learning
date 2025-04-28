@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -50,6 +51,10 @@ fun RegisterScreen(navController:NavHostController) {
     var confirmpass by remember { mutableStateOf(TextFieldValue("")) }
     var context= LocalContext.current
     var passwordVisible by remember { mutableStateOf(false) }
+    var username by remember { mutableStateOf(TextFieldValue("")) }
+
+
+
     Column(modifier = Modifier
         .fillMaxSize()
         .background(Color.Transparent),
@@ -83,9 +88,26 @@ fun RegisterScreen(navController:NavHostController) {
                 .padding(25.dp),
 
             )
+
+
         Spacer(modifier = Modifier.height(1.dp))
 
 
+        OutlinedTextField(value = username, onValueChange = {username=it},
+            label = { Text(text = "Username") },
+
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Filled.Person,
+                    contentDescription = "Person  Icon"
+                )},
+
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(25.dp)
+        )
+
+        Spacer(modifier = Modifier.height(1.dp))
         OutlinedTextField(value =pass , onValueChange = {pass=it},
             label = { Text(text = "Enter Password") },
 
@@ -93,8 +115,8 @@ fun RegisterScreen(navController:NavHostController) {
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             leadingIcon = {
                 Icon(
-                    imageVector = Icons.Filled.Person,
-                    contentDescription = "Email Icon"
+                    imageVector = Icons.Filled.Lock,
+                    contentDescription = "Password Icon"
                 )},
             trailingIcon = {
                 IconButton(onClick = { passwordVisible = !passwordVisible }) {
@@ -115,8 +137,8 @@ fun RegisterScreen(navController:NavHostController) {
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             leadingIcon = {
                 Icon(
-                    imageVector = Icons.Filled.Person,
-                    contentDescription = "Email Icon"
+                    imageVector = Icons.Filled.Lock,
+                    contentDescription = "Password  Icon"
                 )},
             trailingIcon = {
                 IconButton(onClick = { passwordVisible = !passwordVisible }) {
@@ -166,10 +188,6 @@ fun RegisterScreen(navController:NavHostController) {
 
 
 
-@Composable
-fun AuthViewModel(x0: NavHostController, x1: Context) {
-    TODO("Not yet implemented")
-}
 
 @Preview
 @Composable
